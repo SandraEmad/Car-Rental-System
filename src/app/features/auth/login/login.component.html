@@ -1,0 +1,40 @@
+<div class="container">
+  <!-- Left Section -->
+  <div class="left">
+    <!-- <div class="overlay">
+      <h1>Drive Your Journey</h1>
+      <p>Rent cars بسهولة وأمان</p>
+    </div> -->
+  </div>
+
+  <!-- Right Section -->
+  <div class="right">
+    <mat-card>
+      <h2>Create Account</h2>
+
+      <form [formGroup]="loginForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" />
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          class="btn"
+          (click)="submitLoginForm()"
+        >
+          Sign In
+        </button>
+        @if (errorMsg) {
+          <p style="color: red; margin-top: 8px">{{ errorMsg }}</p>
+        }
+      </form>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,133 @@
+<div class="detail-container">
+
+  @if (loading) {
+    <div class="spinner"><mat-spinner diameter="40" /></div>
+  }
+
+  @if (!loading && order) {
+
+    <button mat-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon> Back to Orders
+    </button>
+
+    <h2>Order #{{ order.id }}</h2>
+
+    <div class="grid">
+
+      <!-- Order Info -->
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Order Info</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="info-list">
+            <div class="info-row">
+              <span class="label">Order Type</span>
+              <span>{{ order.order_type }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Payment Type</span>
+              <span>{{ order.payment_type }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Total Price</span>
+              <span>${{ order.total_price }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Delivery Date</span>
+              <span>{{ order.delivery_date | date:'mediumDate' }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Receiving Date</span>
+              <span>{{ order.receiving_date | date:'mediumDate' }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Created At</span>
+              <span>{{ order.created_at | date:'medium' }}</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- User Info -->
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Customer</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="info-list">
+            <div class="info-row">
+              <span class="label">Name</span>
+              <span>{{ order.user?.name || '—' }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Email</span>
+              <span>{{ order.user?.email || '—' }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Phone</span>
+              <span>{{ order.user?.phone || '—' }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Country</span>
+              <span>{{ order.user?.country || '—' }}</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Car Info -->
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Car</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="info-list">
+            <div class="info-row">
+              <span class="label">Name</span>
+              <span>{{ order.car?.name || '—' }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Brand</span>
+              <span>{{ order.car?.brand || '—' }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Model</span>
+              <span>{{ order.car?.model || '—' }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Price/Day</span>
+              <span>${{ order.car?.price_per_day || '—' }}</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Update Payment Status -->
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Update Payment Status</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Payment Status</mat-label>
+            <mat-select [formControl]="paymentStatusControl">
+              <mat-option value="pending">Pending</mat-option>
+              <mat-option value="success">Success</mat-option>
+              <mat-option value="failed">Failed</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary"
+            (click)="updatePaymentStatus()"
+            [disabled]="updating">
+            @if (updating) { Updating... }
+            @else { Update Status }
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+  }
+
+</div>

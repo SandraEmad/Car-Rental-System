@@ -1,0 +1,26 @@
+.users-container { padding: 24px; }
+
+h2 { margin-bottom: 24px; font-size: 1.5rem; }
+
+.filters {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.filters mat-form-field { width: 200px; }
+
+table { width: 100%; }
+
+.spinner { display: flex; justify-content: center; padding: 40px; }
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.badge.admin    { background: #fde68a; color: #92400e; }
+.badge.customer { background: #bbf7d0; color: #065f46; }

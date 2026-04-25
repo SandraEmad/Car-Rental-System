@@ -1,0 +1,43 @@
+.sidenav-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+  background-color: #0255a2 ;
+  color: white;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 16px 24px 24px;
+  color: white;
+}
+
+.active-link {
+  background-color: #023c73;
+  border-radius: 8px;
+  color: white !important;
+}
+
+mat-icon {
+  color: white !important;
+}
+
+span {
+  color: white;
+}
+
+.logout {
+  margin-top: auto;
+  padding: 16px;
+}
+
+.content {
+  padding: 24px;
+  background-color: #f1f5f9;
+}

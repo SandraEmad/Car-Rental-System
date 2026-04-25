@@ -1,0 +1,130 @@
+<div class="cars-container">
+  <div class="header">
+    <h2>Cars Management</h2>
+    <button mat-raised-button color="primary" (click)="openAddForm()">
+      <mat-icon>add</mat-icon> Add Car
+    </button>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <mat-form-field appearance="outline">
+      <mat-label>Search</mat-label>
+      <input matInput [formControl]="searchControl" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Brand</mat-label>
+      <input matInput [formControl]="brandControl" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Min Price</mat-label>
+      <input matInput type="number" [formControl]="minPriceControl" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Max Price</mat-label>
+      <input matInput type="number" [formControl]="maxPriceControl" />
+    </mat-form-field>
+  </div>
+
+  <!-- Add / Edit Form -->
+  @if (showForm) {
+    <div class="form-card">
+      <h3>{{ editingCar ? 'Edit Car' : 'Add New Car' }}</h3>
+      <form [formGroup]="carForm" class="car-form">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Brand</mat-label>
+          <input matInput formControlName="brand" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Model</mat-label>
+          <input matInput formControlName="model" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Kilometers</mat-label>
+          <input matInput type="number" formControlName="kilometers" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Price Per Day</mat-label>
+          <input matInput type="number" formControlName="price_per_day" />
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-raised-button color="primary" (click)="submitForm()">
+            {{ editingCar ? 'Update' : 'Create' }}
+          </button>
+          <button mat-stroked-button (click)="cancelForm()">Cancel</button>
+        </div>
+
+      </form>
+    </div>
+  }
+
+  <!-- Loading -->
+  @if (loading) {
+    <div class="spinner"><mat-spinner diameter="40" /></div>
+  }
+
+  <!-- Table -->
+  @if (!loading) {
+    <table mat-table [dataSource]="cars" class="mat-elevation-z2">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>#</th>
+        <td mat-cell *matCellDef="let c">{{ c.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let c">{{ c.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="brand">
+        <th mat-header-cell *matHeaderCellDef>Brand</th>
+        <td mat-cell *matCellDef="let c">{{ c.brand }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="model">
+        <th mat-header-cell *matHeaderCellDef>Model</th>
+        <td mat-cell *matCellDef="let c">{{ c.model }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="kilometers">
+        <th mat-header-cell *matHeaderCellDef>KM</th>
+        <td mat-cell *matCellDef="let c">{{ c.kilometers }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="price_per_day">
+        <th mat-header-cell *matHeaderCellDef>Price/Day</th>
+        <td mat-cell *matCellDef="let c">${{ c.price_per_day }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let c">
+          <button mat-icon-button color="primary" (click)="openEditForm(c)" matTooltip="Edit">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteCar(c.id)" matTooltip="Delete">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  }
+
+</div>

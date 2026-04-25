@@ -1,0 +1,31 @@
+.orders-container { padding: 24px; }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.filters {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.filters mat-form-field { width: 180px; }
+
+table { width: 100%; }
+
+.spinner { display: flex; justify-content: center; padding: 40px; }
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.badge.paid   { background: #bbf7d0; color: #065f46; }
+.badge.unpaid { background: #fecaca; color: #991b1b; }

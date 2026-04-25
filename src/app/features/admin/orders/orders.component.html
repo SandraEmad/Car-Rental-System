@@ -1,0 +1,113 @@
+<div class="orders-container">
+  <div class="header">
+    <h2>Orders Management</h2>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <mat-form-field appearance="outline">
+      <mat-label>Search</mat-label>
+      <input matInput [formControl]="searchControl" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Payment Type</mat-label>
+      <mat-select [formControl]="paymentTypeControl">
+        <mat-option value="">All</mat-option>
+        <mat-option value="cash">Cash</mat-option>
+        <mat-option value="wallet">Wallet</mat-option>
+        <mat-option value="installment">Installment</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Payment Status</mat-label>
+      <mat-select [formControl]="paymentStatusControl">
+        <mat-option value="">All</mat-option>
+        <mat-option value="paid">Paid</mat-option>
+        <mat-option value="unpaid">Unpaid</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Order Type</mat-label>
+      <mat-select [formControl]="orderTypeControl">
+        <mat-option value="">All</mat-option>
+        <mat-option value="daily">Daily</mat-option>
+        <mat-option value="monthly">Monthly</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Loading -->
+  @if (loading) {
+    <div class="spinner"><mat-spinner diameter="40" /></div>
+  }
+
+  <!-- Table -->
+  @if (!loading) {
+    <table mat-table [dataSource]="orders" class="mat-elevation-z2">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>#</th>
+        <td mat-cell *matCellDef="let o">{{ o.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="user">
+        <th mat-header-cell *matHeaderCellDef>User</th>
+        <td mat-cell *matCellDef="let o">{{ o.user?.name || o.user_id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="car">
+        <th mat-header-cell *matHeaderCellDef>Car</th>
+        <td mat-cell *matCellDef="let o">{{ o.car?.name || o.car_id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="order_type">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let o">{{ o.order_type }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="payment_type">
+        <th mat-header-cell *matHeaderCellDef>Payment</th>
+        <td mat-cell *matCellDef="let o">{{ o.payment_type }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="payment_status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let o">
+          <span [class]="'badge ' + o.payment_status">{{ o.payment_status }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="total_price">
+        <th mat-header-cell *matHeaderCellDef>Total</th>
+        <td mat-cell *matCellDef="let o">${{ o.total_price }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="delivery_date">
+        <th mat-header-cell *matHeaderCellDef>Start</th>
+       <td mat-cell *matCellDef="let o">{{ o.delivery_date | date:'mediumDate' }}</td>
+
+      </ng-container>
+
+      <ng-container matColumnDef="receiving_date">
+        <th mat-header-cell *matHeaderCellDef>End</th>
+        <td mat-cell *matCellDef="let o">{{ o.receiving_date | date:'mediumDate' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Details</th>
+        <td mat-cell *matCellDef="let o">
+          <button mat-icon-button color="primary" (click)="viewDetail(o.id)" matTooltip="View">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  }
+
+</div>
