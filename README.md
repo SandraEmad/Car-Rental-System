@@ -20,20 +20,23 @@ Open your browser and navigate to `http://localhost:4200/`
 | Customer | customer@customer.com | password |
 
 ## Project Structure
+
+```
 src/app/
 ├── core/
-│   ├── services/       # AuthService, CarService, UserService, OrderService
-│   ├── interceptors/   # headerInterceptor (Bearer Token), errorInterceptor
-│   └── guards/         # authGuard, adminGuard, customerGuard
+│   ├── services/       
+│   ├── interceptors/   
+│   └── guards/         
 ├── shared/
-│   └── models/         # IUser, ICar, IOrder
+│   └── models/         
 ├── features/
-│   ├── auth/           # Login, Register
-│   ├── admin/          # Users, Cars, Orders + Details
-│   └── customer/       # Cars, Orders, Installments
+│   ├── auth/           
+│   ├── admin/          
+│   └── customer/       
 └── layout/
-├── admin-layout/   # Admin Sidebar + Router Outlet
-└── customer-layout/ # Customer Sidebar + Router Outlet
+    ├── admin-layout/   
+    └── customer-layout/
+```
 ## Features
 ### Admin Dashboard
 - ✅ Users Management (Read Only)
@@ -52,4 +55,4 @@ Click the 🌙 icon in the sidebar to toggle dark mode
 ## API
 - Base URL: `https://task.abudiyab-soft.com/api`
 - Authentication: Bearer Token (handled automatically via interceptor)
-- 
+
